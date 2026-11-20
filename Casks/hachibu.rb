@@ -1,6 +1,6 @@
 cask "hachibu" do
-  version "0.2"
-  sha256 "ce4535f7f363decb0db2a39bfd329f78e2f8ba6f9aeb0be8a58d36b9f2ea9924"
+  version "0.3"
+  sha256 "e2bfeeca4ccf76d6d92f8e6f052f3a6659cdab9c97f5aa8243c17b6114271609"
 
   url "https://github.com/hammadmo/hachibu/releases/download/v#{version}/Hachibu-#{version}.zip"
   name "Hachibu"
