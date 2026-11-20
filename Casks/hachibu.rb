@@ -12,18 +12,21 @@ cask "hachibu" do
     strategy :github_latest
   end
 
+  auto_updates true
   depends_on arch: :arm64
   depends_on macos: :golden_gate
 
   app "Hachibu.app"
 
-  uninstall launchctl: "app.hachibu.mac.helper",
-            quit:      "app.hachibu.mac"
+  # The helper is left alone here: this also runs on an upgrade, and taking
+  # the helper out of launchd then leaves Hachibu unable to reach it.
+  uninstall quit: "app.hachibu.mac"
 
-  zap trash: [
-    "~/Library/Application Support/Hachibu",
-    "~/Library/Preferences/app.hachibu.mac.plist",
-  ]
+  zap launchctl: "app.hachibu.mac.helper",
+      trash:     [
+        "~/Library/Application Support/Hachibu",
+        "~/Library/Preferences/app.hachibu.mac.plist",
+      ]
 
   caveats <<~EOS
     Limits below 80%, sailing, heat protection, and calibration need Hachibu's
