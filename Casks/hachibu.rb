@@ -18,23 +18,28 @@ cask "hachibu" do
 
   app "Hachibu.app"
 
-  # The helper is left alone here: this also runs on an upgrade, and taking
-  # the helper out of launchd then leaves Hachibu unable to reach it.
+  # The helper is left alone, here and in zap. An upgrade runs the uninstall
+  # steps too, and taking the helper out of launchd then leaves Hachibu
+  # unable to reach it. In zap the step did not remove it when tried.
+  # "Remove Helper…" in the app is what removes it.
   uninstall quit: "app.hachibu.mac"
 
-  zap launchctl: "app.hachibu.mac.helper",
-      trash:     [
-        "~/Library/Application Support/Hachibu",
-        "~/Library/Preferences/app.hachibu.mac.plist",
-      ]
+  zap trash: [
+    "~/Library/Application Support/Hachibu",
+    "~/Library/Preferences/app.hachibu.mac.plist",
+  ]
 
   caveats <<~EOS
     Limits below 80%, sailing, heat protection, and calibration need Hachibu's
     helper. Install it from Settings > Helper and allow it once in
     System Settings > General > Login Items.
 
-    Before uninstalling, click "Remove Helper…" in Settings > Helper. That moves
-    a limit macOS does not offer by itself up to one it does. The charge limit
-    is a macOS setting and stays as it is after Hachibu is gone.
+    Homebrew does not remove the helper, not with uninstall and not with
+    --zap. Before uninstalling, click "Remove Helper…" in Settings > Helper:
+    that is the only step that removes it. It also moves a limit macOS does
+    not offer by itself up to one it does.
+
+    The charge limit is a macOS setting and stays as it is after Hachibu is
+    gone. Change it in System Settings > Battery.
   EOS
 end
