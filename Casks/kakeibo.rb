@@ -1,6 +1,6 @@
 cask "kakeibo" do
-  version "0.3.3"
-  sha256 "96512fbd41de076532ca6d595d490f637fefa4a8c95f3921245e4f47e184a13f"
+  version "0.3.4"
+  sha256 "d38d1153a5d951ff80316754c16ad42b87877edad7fc2016387c235d90503b89"
 
   url "https://github.com/hammadmo/kakeibo/releases/download/v#{version}/Kakeibo-#{version}.zip"
   name "Kakeibo"
